@@ -1,26 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Product } from "../api/types";
 
-export type Product = {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-}
+type InitialState = {
+  products: Product[] | [];
+};
 
-const initialState =  {
-    products: Product[] | [];
-}
+const initialState: InitialState = {
+  products: [],
+};
 
 export const productSlice = createSlice({
-    name: 'products',
-    initialState,
-    reducers: {
+  name: "products",
+  initialState,
+  reducers: {},
+});
 
-    }
-})
-
-
-export const { } = productSlice.actions;
-
+export const {} = productSlice.actions;
