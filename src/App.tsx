@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { productsApi } from "./api";
+import NarBar from "./components/NavBar/NarBar";
+import ProductsList from "./components/Products/ProductsList";
 
 function App() {
-  useEffect(() => {
-    productsApi.getSingleProduct(5);
-  }, []);
   return (
-    <div className="App">
-      <h1>Hello</h1>
+    <div>
+      <NarBar />
+      <ProductsList />
     </div>
   );
 }
