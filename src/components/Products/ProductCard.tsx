@@ -1,4 +1,4 @@
-import React from "react";
+import DisplayImg from "../../images/placeholderr.jpg";
 import { Button, ListGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -14,10 +14,7 @@ const ProductCard = (props: Props) => {
   return (
     <div>
       <Card style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src="../../images/placeholderr.jpg/100px180?text=Image cap"
-        />
+        <Card.Img variant="top" src={DisplayImg} />
         <Card.Body>
           <Card.Title>Gucci</Card.Title>
           <Card.Text>
