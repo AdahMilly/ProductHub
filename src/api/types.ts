@@ -1,8 +1,13 @@
+export type ProductCategory =
+  | "jewelry"
+  | "electronics"
+  | "men's clothing"
+  | "women's clothing";
 export type Product = {
   id: number;
   title: string;
   price: number;
-  category: string;
+  category: ProductCategory;
   description: string;
   image: string;
 };
@@ -13,3 +18,4 @@ export type GetProductsFilter = {
 };
 
 export type AddProductPayload = Omit<Product, "id">;
+export type AddProductProps = Omit<Product, "id">;

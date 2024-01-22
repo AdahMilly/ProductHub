@@ -1,13 +1,17 @@
-import { useEffect } from "react";
-import { productsApi } from "./api";
-import NarBar from "./components/NavBar/NarBar";
-import ProductsList from "./components/Products/ProductsList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { routes } from "./routes/routes";
+import ViewProduct from "./components/Products/ViewProduct";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
     <div>
-      <NarBar />
-      <ProductsList />
+      <BrowserRouter>
+        <Routes>
+          <Route path={routes.home} element={<Layout />} />
+          <Route path={routes.viewProduct} element={<ViewProduct />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
