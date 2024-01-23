@@ -1,0 +1,11 @@
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
+import { AppDispatch, RootState } from "./store";
+
+type DispatchFunction = () => AppDispatch;
+export const useAppDispatch: DispatchFunction = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+//create a slice
+//each operation represents an action - create action
+//add cases for each action
+//dispatch

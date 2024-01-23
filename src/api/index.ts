@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 import { config } from "../config";
-import { AddProductPayload, GetProductsFilter, Product } from "./types";
+import { AddProductPayload, GetProductsFilter } from "./types";
 
 class ProductsApi {
   private instance;
@@ -29,9 +29,8 @@ class ProductsApi {
   async getAllProducts(filter: GetProductsFilter = {}) {
     try {
       const response = await this.instance.get(
-        `/products?${queryString.stringify(filter)}`,
+        `/products?${queryString.stringify(filter)}`
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return { message: "request failed", error };
@@ -40,13 +39,12 @@ class ProductsApi {
 
   async getAllProductsByCategory(
     category: string,
-    filter: GetProductsFilter = {},
+    filter: GetProductsFilter = {}
   ) {
     try {
       const response = await this.instance.get(
-        `/products/category/${category}?${queryString.stringify(filter)}`,
+        `/products/category/${category}?${queryString.stringify(filter)}`
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return { message: "request failed", error };
@@ -56,8 +54,9 @@ class ProductsApi {
   async addProduct(product: AddProductPayload) {
     try {
       const response = await this.instance.post("/products", product);
-      console.log(response.data);
       return response.data;
+      console.log(response.data);
+      
     } catch (error) {
       return { message: "request failed", error };
     }
@@ -67,7 +66,7 @@ class ProductsApi {
     try {
       const response = await this.instance.put(
         `/products/${productId}`,
-        product,
+        product
       );
       console.log(response.data);
       return response.data;

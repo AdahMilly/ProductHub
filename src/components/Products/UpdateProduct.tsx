@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-// import { useAddTagMutation } from "./tagsSlice";
-// import SpinnerButton from "components/common/SpinnerButton";
 import { MdAddCircle, MdFrontLoader } from "react-icons/md";
 import { AddProductProps, ProductCategory } from "../../api/types";
 
@@ -26,18 +24,6 @@ const EditProduct = (props: Props) => {
     image: defaultValue.image || "",
     category: defaultValue.category || "",
   });
-  //   const [addTag] = useAddTagMutation();
-  //   const handleAddTag = async (e: React.FormEvent, tagsData: AddTags) => {
-  //     e.preventDefault();
-  //     try {
-  //       const response = await addTag({ ...tagsData }).unwrap();
-  //       if (response.result.message === "tag created succcessful") {
-  //         closeTagsModal();
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
   const handleOnChange = (name: string, value: string | number) => {
     setState((prev) => ({ ...prev, [name]: value }));
   };

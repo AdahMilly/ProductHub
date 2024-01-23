@@ -1,30 +1,27 @@
-import DisplayImg from "../../images/placeholderr.jpg";
+// import DisplayImg from "../../images/placeholderr.jpg";
 import { Button, ListGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
+import { Product } from "../../api/types";
 
-type Props = {};
-
-const ProductCard = (props: Props) => {
+const ProductCard = ({ product }: { product: Product }) => {
+  const { title, description, price, image, category } = product;
   const navigate = useNavigate();
   const handleViewProduct = () => {
     navigate(routes.viewProduct);
   };
   return (
-    <div>
+    <div className="d-grid gap-3 grid-row">
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={DisplayImg} />
+        {/* <Card.Img variant="top">{image}</Card.Img> */}
         <Card.Body>
-          <Card.Title>Gucci</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>{description}</Card.Text>
         </Card.Body>
         <ListGroup className="sects">
-          <ListGroup.Item>Price</ListGroup.Item>
-          <ListGroup.Item>Category</ListGroup.Item>
+          <ListGroup.Item>{price}</ListGroup.Item>
+          <ListGroup.Item>{category}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
           <Button variant="primary" onClick={handleViewProduct}>

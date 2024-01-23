@@ -3,30 +3,34 @@ import { productsApi } from "../../api";
 import { Button, Container, DropdownDivider } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import AddProduct from "./AddProduct";
-
-
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchProductsAction } from "../../redux/product/ProductActions";
 
 const ProductsList = () => {
-    const [state, setState] = useState({
-        showModal:false
-    })
+  const [state, setState] = useState({
+    showModal: false,
+  });
+  const dispatch = useAppDispatch();
+  const productsState = useAppSelector((state) => state.products);
+  console.log(productsState);
+
   useEffect(() => {
-    productsApi.getAllProducts();
+    dispatch(fetchProductsAction({}));
   }, []);
 
-   const handleOpenModal = (e: any) => {
-     e.preventDefault();
-     setState((prev) => ({
-       ...prev,
-       showModal: !prev.showModal,
-     }));
-   };
-   const closeModal = () => {
-     setState((prev) => ({ ...prev, showModal: false }));
-   };
+  const handleOpenModal = (e: any) => {
+    e.preventDefault();
+    setState((prev) => ({
+      ...prev,
+      showModal: !prev.showModal,
+    }));
+  };
+  const closeModal = () => {
+    setState((prev) => ({ ...prev, showModal: false }));
+  };
   return (
     <Container>
-      {/* <AddProduct onHide={closeModal} show={state?.showModal}/> */}
+      <AddProduct onHide={closeModal} show={state?.showModal} />
       <div className="d-flex flex-row w-100 justify-content-between align-items-center gap-3">
         <h1>Products</h1>
         <div className="search-products d-flex flex-row justify-space-between align-items-center gap-3">
@@ -37,14 +41,17 @@ const ProductsList = () => {
             </span>
           </div>
           <div className="btn-product m-2">
-            <Button variant="primary" onClick={handleOpenModal}>Add Product</Button>
+            <Button variant="primary" onClick={handleOpenModal}>
+              Add Product
+            </Button>
           </div>
         </div>
       </div>
       <hr />
       <DropdownDivider />
       <div className="product-list">
-        <ProductCard />
+        {productsState.products.map(product => <ProductCard product={product} />)}
+        {/* <ProductCard /> */}
       </div>
     </Container>
   );

@@ -1,60 +1,52 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-// import { useAddTagMutation } from "./tagsSlice";
-// import SpinnerButton from "components/common/SpinnerButton";
 import { MdAddCircle, MdFrontLoader } from "react-icons/md";
-import { AddProductProps, ProductCategory } from "../../api/types";
+import { AddProductPayload, AddProductProps } from "../../api/types";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { addProductAction } from "../../redux/product/ProductActions";
 
 type Props = {
   show: boolean;
   onHide: () => void;
-  defaultValue: {
-    title: string;
-    description: string;
-    price: number;
-    image: string;
-    category: ProductCategory;
-  };
 };
 const AddProduct = (props: Props) => {
-  const { show, onHide: closeTagsModal, defaultValue } = props;
+  const { show, onHide: closeTagsModal } = props;
 
-  const [state, setState] = useState<AddProductProps>({
-    title: defaultValue.title || "",
-    description: defaultValue.description || "",
-    price: defaultValue.price || 0,
-    image: defaultValue.image || "",
-    category: defaultValue.category || "",
+  const [productState, setProductState] = useState<AddProductProps>({
+    title: "",
+    description: "",
+    price: 0,
+    image: "",
+    category: "jewelry",
   });
-  //   const [addTag] = useAddTagMutation();
-  //   const handleAddTag = async (e: React.FormEvent, tagsData: AddTags) => {
-  //     e.preventDefault();
-  //     try {
-  //       const response = await addTag({ ...tagsData }).unwrap();
-  //       if (response.result.message === "tag created succcessful") {
-  //         closeTagsModal();
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const dispatch = useAppDispatch();
+  const handleAddProduct = (e: React.FormEvent, product: AddProductPayload) => {
+    e.preventDefault();
+    dispatch(addProductAction(product));
+  };
+
   const handleOnChange = (name: string, value: string | number) => {
-    setState((prev) => ({ ...prev, [name]: value }));
+    setProductState((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
     <div>
       <Modal show={show} onHide={closeTagsModal}>
-        <Modal.Header>Add Tag</Modal.Header>
+        <Modal.Header>
+          <h1>Add new product</h1>
+        </Modal.Header>
         <Modal.Body>
-          <form>
+          <form
+            onSubmit={(e) =>
+              handleAddProduct(e, productState as AddProductPayload)
+            }>
             <Form.Group className="gap-2 mb-2">
               <Form.Label>Title </Form.Label>
               <Form.Control
                 required
                 className="w-100"
                 name="title"
-                value={state.title}
+                value={productState.title}
                 onChange={(event) =>
                   handleOnChange("title", event?.target.value)
                 }
@@ -66,7 +58,7 @@ const AddProduct = (props: Props) => {
                 required
                 className="w-100"
                 name="description"
-                value={state.description}
+                value={productState.description}
                 onChange={(event) =>
                   handleOnChange("description", event?.target.value)
                 }
@@ -78,7 +70,7 @@ const AddProduct = (props: Props) => {
                 required
                 className="w-100"
                 name="price"
-                value={state.price}
+                value={productState.price}
                 onChange={(event) =>
                   handleOnChange("price", event?.target.value)
                 }
@@ -89,20 +81,17 @@ const AddProduct = (props: Props) => {
                 type="file"
                 className="w-100"
                 name="image"
-                value={state.image}
+                value={productState.image}
                 onChange={(event) =>
                   handleOnChange("image", event?.target.value)
                 }
               />
-              <Form.Label
-                required
-                type="select"
-                className="w-100"
-                name="category">
+              <Form.Label required className="w-100">
                 Category{" "}
               </Form.Label>
               <Form.Select
-                value={state.category}
+                name="category"
+                value={productState.category}
                 onChange={(event) =>
                   handleOnChange("category", event?.target.value)
                 }>
