@@ -28,12 +28,22 @@ const ViewProduct = (props: Props) => {
         <Col sm={4}>
           <img src={ImgP} alt="" height={400} width={400} />
         </Col>
-        <Col sm={2}>Title</Col>
-        <Col sm={2}>Description</Col>
-        <Col sm={2}>Price</Col>
-        <Col sm={2}>Category</Col>
+        <Col md={8}>
+          <Col sm={2}>
+            Title: <span>Title goes here</span>
+          </Col>
+          <Col sm={2}>
+            Description: <span>Description goes here</span>
+          </Col>
+          <Col sm={2}>
+            Price: <span>Price goes here</span>
+          </Col>
+          <Col sm={2}>
+            Category: <span>Cateory goes here</span>
+          </Col>
+        </Col>
       </Row>
-      <div className="tns d-flex flex-row gap-3 justify-space-between mt-6">
+      <div className="tns d-flex flex-row gap-3 justify-space-between m-6">
         <Button variant="danger" onClick={handleOpenModal}>
           Delete Product
         </Button>
