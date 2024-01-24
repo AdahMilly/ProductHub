@@ -30,7 +30,7 @@ export const deleteProductAction = createAsyncThunk(
     if (response.error) {
       return thunkApi.rejectWithValue(response);
     }
-    return { response };
+    return { productId };
   }
 );
 // export const updateProductAction = createAsyncThunk(

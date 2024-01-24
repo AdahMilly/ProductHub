@@ -10,7 +10,7 @@ type Props = {
   onHide: () => void;
 };
 const AddProduct = (props: Props) => {
-  const { show, onHide: closeTagsModal } = props;
+  const { show, onHide: closeProductModal } = props;
 
   const [productState, setProductState] = useState<AddProductProps>({
     title: "",
@@ -20,10 +20,10 @@ const AddProduct = (props: Props) => {
     category: "jewelry",
   });
   const dispatch = useAppDispatch();
-  const handleAddProduct = (e: React.FormEvent, product: AddProductPayload) => {
+  const handleAddProduct = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addProductAction(product));
-    setProductState(product)
+    dispatch(addProductAction(productState));
+    closeProductModal();
   };
 
   const handleOnChange = (name: string, value: string | number) => {
@@ -32,15 +32,14 @@ const AddProduct = (props: Props) => {
 
   return (
     <div>
-      <Modal show={show} onHide={closeTagsModal}>
+      <Modal show={show} onHide={closeProductModal}>
         <Modal.Header>
           <h1>Add new product</h1>
         </Modal.Header>
         <Modal.Body>
           <form
-            onSubmit={(e) =>
-              handleAddProduct(e, productState as AddProductPayload)
-            }>
+            onSubmit={handleAddProduct}
+>
             <Form.Group className="gap-2 mb-2">
               <Form.Label>Title </Form.Label>
               <Form.Control
@@ -59,6 +58,7 @@ const AddProduct = (props: Props) => {
                 required
                 className="w-100"
                 name="description"
+                as="textarea"
                 value={productState.description}
                 onChange={(event) =>
                   handleOnChange("description", event?.target.value)
@@ -79,7 +79,7 @@ const AddProduct = (props: Props) => {
               <Form.Label>Image </Form.Label>
               <Form.Control
                 required
-                type="file"
+                type="text"
                 className="w-100"
                 name="image"
                 value={productState.image}
@@ -103,22 +103,23 @@ const AddProduct = (props: Props) => {
                 <option value="women's clothing">Women's clothing</option>
               </Form.Select>
             </Form.Group>
-            <Button
-              disabled={false}
-              className="d-flex align-items-center gap-2"
-              type="submit"
-              variant="danger">
-              {false ? <MdFrontLoader /> : <MdAddCircle />} Add Product
-            </Button>
+            <div className="d-flex gap-3 justify-content-between">
+              <Button
+                variant="outline"
+                type="button"
+                onClick={closeProductModal}>
+                Cancel
+              </Button>
+              <Button
+                disabled={false}
+                className="d-flex align-items-center gap-2"
+                type="submit"
+                variant="danger">
+                {false ? <MdFrontLoader /> : <MdAddCircle />} Add Product
+              </Button>
+            </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <div className="d-flex gap-3 justify-content-between">
-            <Button variant="danger" onClick={closeTagsModal}>
-              Cancel
-            </Button>
-          </div>
-        </Modal.Footer>
       </Modal>
     </div>
   );

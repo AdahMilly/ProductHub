@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { productsApi } from "../../api";
-import { Button, Container, DropdownDivider } from "react-bootstrap";
+import { Button, Col, Container, DropdownDivider } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import AddProduct from "./AddProduct";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -9,7 +9,7 @@ import { fetchProductsAction } from "../../redux/product/ProductActions";
 const ProductsList = () => {
   const [state, setState] = useState({
     showModal: false,
-    isLoading:false
+    isLoading: false,
   });
   const dispatch = useAppDispatch();
   const productsState = useAppSelector((state) => state.products);
@@ -29,6 +29,7 @@ const ProductsList = () => {
   const closeModal = () => {
     setState((prev) => ({ ...prev, showModal: false }));
   };
+  if (productsState.isLoading) return <div>Loading....</div>;
   return (
     <Container>
       <AddProduct onHide={closeModal} show={state?.showModal} />
@@ -50,10 +51,16 @@ const ProductsList = () => {
       </div>
       <hr />
       <DropdownDivider />
-      <div className="product-list row row-cols-1 row-cols-md-3 h-100">
-        {productsState.products.length > 0 ? productsState.products.map((product) => (
-          <ProductCard product={product} />
-        )): <h1>No products found</h1>}
+      <div className="product-list row h-100">
+        {productsState.products.length > 0 ? (
+          productsState.products.map((product) => (
+            <Col className="mt-3" xs={12} sm={6} md={4}>
+              <ProductCard product={product} />
+            </Col>
+          ))
+        ) : (
+          <h1>No products found</h1>
+        )}
       </div>
     </Container>
   );

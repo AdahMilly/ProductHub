@@ -3,10 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import React from "react";
 import { Card, Container } from "react-bootstrap";
 
-type Props = {};
-//386032736176-u0pjie31gk6dg6du1qhd00oou270sbgb.apps.googleusercontent.com
-
-const SignIn = (props: Props) => {
+const SignIn = () => {
   const responseMessage = (response: any) => {
     let credentialResponse = jwtDecode(response.credential);
     console.log(credentialResponse);

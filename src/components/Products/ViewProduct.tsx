@@ -1,4 +1,4 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, DropdownDivider, Row } from "react-bootstrap";
 import ImgP from "../../images/laura.jpg";
 import NarBar from "../NavBar/NarBar";
 import { useState } from "react";
@@ -48,24 +48,26 @@ const ViewProduct = () => {
           show={state?.showEditModal}
           product={product}
         />
-        <NarBar />
+        <h2 className="p-4">Product Detail</h2>
+        <hr />
+        <DropdownDivider />
         <Row>
           <Col sm={4}>
-            <img src={ImgP} alt="" height={400} width={400} />
+            <img src={image} alt="" height={400} width={400} />
           </Col>
           <Col md={8}>
-            <Col sm={2}>
+            <p className="fw-bold">
               Title: <span>{title}</span>
-            </Col>
-            <Col sm={2}>
+            </p>
+            <p>
               Description: <span>{description}</span>
-            </Col>
-            <Col sm={2}>
+            </p>
+            <p>
               Price: <span>{price}</span>
-            </Col>
-            <Col sm={2}>
+            </p>
+            <p>
               Category: <span>{category}</span>
-            </Col>
+            </p>
           </Col>
         </Row>
         <div className="tns d-flex flex-row gap-3 justify-space-between m-6">

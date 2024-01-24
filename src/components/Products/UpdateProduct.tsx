@@ -10,6 +10,8 @@ type Props = {
 };
 const EditProduct = (props: Props) => {
   const { show, onHide: closeTagsModal, product } = props;
+  console.log(product);
+  
 
   const [state, setState] = useState<AddProductProps>({
     title: product.title || "",
@@ -44,6 +46,7 @@ const EditProduct = (props: Props) => {
               <Form.Label>Description </Form.Label>
               <Form.Control
                 required
+                as="textarea"
                 className="w-100"
                 name="description"
                 value={state.description}
@@ -66,7 +69,7 @@ const EditProduct = (props: Props) => {
               <Form.Label>Image </Form.Label>
               <Form.Control
                 required
-                type="file"
+                type="text"
                 className="w-100"
                 name="image"
                 value={state.image}
@@ -95,7 +98,7 @@ const EditProduct = (props: Props) => {
               className="d-flex align-items-center gap-2"
               type="submit"
               variant="danger">
-              {false ? <MdFrontLoader /> : <MdAddCircle />} Add Product
+              {false ? <MdFrontLoader /> : <MdAddCircle />} Edit Product
             </Button>
           </form>
         </Modal.Body>
