@@ -9,6 +9,7 @@ import { fetchProductsAction } from "../../redux/product/ProductActions";
 const ProductsList = () => {
   const [state, setState] = useState({
     showModal: false,
+    isLoading:false
   });
   const dispatch = useAppDispatch();
   const productsState = useAppSelector((state) => state.products);
