@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={routes.home} element={<Layout />} />
-          <Route path={routes.viewProduct} element={<ViewProduct />} />
+          <Route path={`${routes.viewProduct}/:productId`} element={<ViewProduct/>} />
         </Routes>
       </BrowserRouter>
     </div>

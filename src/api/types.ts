@@ -18,5 +18,6 @@ export type GetProductsFilter = {
 };
 
 export type AddProductPayload = Omit<Product, "id">;
+export type ViewProductTypes = Omit<Product, "id">;
 export type AddProductProps = Omit<Product, "id">;
 export type Products = Omit<Product, "id">;

@@ -23,6 +23,7 @@ const AddProduct = (props: Props) => {
   const handleAddProduct = (e: React.FormEvent, product: AddProductPayload) => {
     e.preventDefault();
     dispatch(addProductAction(product));
+    setProductState(product)
   };
 
   const handleOnChange = (name: string, value: string | number) => {

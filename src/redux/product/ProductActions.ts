@@ -33,3 +33,9 @@ export const deleteProductAction = createAsyncThunk(
     return { response };
   }
 );
+// export const updateProductAction = createAsyncThunk(
+//   "products/updateProduct",
+//   async({productId:number, product:AddProductPayload}, thunkApi) => {
+//     const updatedProduct = await productsApi.updateProduct(productId, product)
+//   }
+// )

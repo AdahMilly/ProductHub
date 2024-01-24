@@ -6,13 +6,13 @@ import { routes } from "../../routes/routes";
 import { Product } from "../../api/types";
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const { title, description, price, image, category } = product;
+  const { id, title, description, price, image, category } = product;
   const navigate = useNavigate();
-  const handleViewProduct = () => {
-    navigate(routes.viewProduct);
+  const handleViewProduct = (productId:number) => {
+    navigate(`${routes.viewProduct}/${productId}`);
   };
   return (
-    <div className="d-grid gap-3 grid-row">
+    <div className="prdoduct-card-cont">
       <Card style={{ width: "18rem" }}>
         {/* <Card.Img variant="top">{image}</Card.Img> */}
         <Card.Body>
@@ -24,7 +24,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <ListGroup.Item>{category}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <Button variant="primary" onClick={handleViewProduct}>
+          <Button variant="primary" onClick={() => handleViewProduct(id)}>
             View Product
           </Button>
         </Card.Body>

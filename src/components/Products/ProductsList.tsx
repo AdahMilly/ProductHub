@@ -49,9 +49,10 @@ const ProductsList = () => {
       </div>
       <hr />
       <DropdownDivider />
-      <div className="product-list">
-        {productsState.products.map(product => <ProductCard product={product} />)}
-        {/* <ProductCard /> */}
+      <div className="product-list row row-cols-1 row-cols-md-3 h-100">
+        {productsState.products.length > 0 ? productsState.products.map((product) => (
+          <ProductCard product={product} />
+        )): <h1>No products found</h1>}
       </div>
     </Container>
   );

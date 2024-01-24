@@ -1,28 +1,22 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { MdAddCircle, MdFrontLoader } from "react-icons/md";
-import { AddProductProps, ProductCategory } from "../../api/types";
+import { AddProductProps, Product } from "../../api/types";
 
 type Props = {
   show: boolean;
   onHide: () => void;
-  defaultValue: {
-    title: string;
-    description: string;
-    price: number;
-    image: string;
-    category: ProductCategory;
-  };
+  product: Product;
 };
 const EditProduct = (props: Props) => {
-  const { show, onHide: closeTagsModal, defaultValue } = props;
+  const { show, onHide: closeTagsModal, product } = props;
 
   const [state, setState] = useState<AddProductProps>({
-    title: defaultValue.title || "",
-    description: defaultValue.description || "",
-    price: defaultValue.price || 0,
-    image: defaultValue.image || "",
-    category: defaultValue.category || "",
+    title: product.title || "",
+    description: product.description || "",
+    price: product.price || 0,
+    image: product.image || "",
+    category: product.category || "",
   });
   const handleOnChange = (name: string, value: string | number) => {
     setState((prev) => ({ ...prev, [name]: value }));
@@ -80,10 +74,11 @@ const EditProduct = (props: Props) => {
                   handleOnChange("image", event?.target.value)
                 }
               />
-              <Form.Label required className="w-100" name="category">
-                Category{" "}
-              </Form.Label>
+              <Form.Label>Category </Form.Label>
               <Form.Select
+                required
+                className="w-100"
+                name="category"
                 value={state.category}
                 onChange={(event) =>
                   handleOnChange("category", event?.target.value)

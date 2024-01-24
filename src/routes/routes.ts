@@ -1,4 +1,4 @@
 export const routes = {
-  viewProduct: "/viewProduct",
+  viewProduct: "/product",
   home: "/",
 };

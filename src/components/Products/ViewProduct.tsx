@@ -4,10 +4,17 @@ import NarBar from "../NavBar/NarBar";
 import { useState } from "react";
 import DeleteProductModal from "./DeleteProductModal";
 import EditProduct from "./UpdateProduct";
+import { Product } from "../../api/types";
+import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
 
-type Props = {};
-
-const ViewProduct = (props: Props) => {
+const ViewProduct = () => {
+  const { productId } = useParams();
+  const productsState = useAppSelector((state) => state.products);
+  const product = productsState.products.find(
+    (product) => product.id === Number(productId)
+  ) as Product;
+  const { title, description, price, image, category } = product;
   const [state, setState] = useState({
     showModal: false,
     showEditModal: false,
@@ -22,8 +29,7 @@ const ViewProduct = (props: Props) => {
   const closeModal = () => {
     setState((prev) => ({ ...prev, showModal: false }));
   };
-
-  const handleEditModal = (e: any) => {
+  const openEditModal = (e: any) => {
     e.preventDefault();
     setState((prev) => ({
       ...prev,
@@ -32,10 +38,16 @@ const ViewProduct = (props: Props) => {
   };
   const closeEditModal = () => {
     setState((prev) => ({ ...prev, showEditModal: false }));
-    return (
+  };
+  return (
+    <>
       <Container>
         <DeleteProductModal onHide={closeModal} show={state?.showModal} />
-        {/* <EditProduct onHide={closeEditModal} show={state?.showEditModal} defaultValue={defaultValue}/> */}
+        <EditProduct
+          onHide={closeEditModal}
+          show={state?.showEditModal}
+          product={product}
+        />
         <NarBar />
         <Row>
           <Col sm={4}>
@@ -43,16 +55,16 @@ const ViewProduct = (props: Props) => {
           </Col>
           <Col md={8}>
             <Col sm={2}>
-              Title: <span>Title goes here</span>
+              Title: <span>{title}</span>
             </Col>
             <Col sm={2}>
-              Description: <span>Description goes here</span>
+              Description: <span>{description}</span>
             </Col>
             <Col sm={2}>
-              Price: <span>Price goes here</span>
+              Price: <span>{price}</span>
             </Col>
             <Col sm={2}>
-              Category: <span>Cateory goes here</span>
+              Category: <span>{category}</span>
             </Col>
           </Col>
         </Row>
@@ -60,12 +72,13 @@ const ViewProduct = (props: Props) => {
           <Button variant="danger" onClick={handleOpenModal}>
             Delete Product
           </Button>
-          <Button variant="primary" onClick={handleOpenModal}>
+          <Button variant="primary" onClick={openEditModal}>
             Edit Product
           </Button>
         </div>
       </Container>
-    );
-  };
+    </>
+  );
 };
+
 export default ViewProduct;
