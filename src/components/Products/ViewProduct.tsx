@@ -70,7 +70,7 @@ const ViewProduct = () => {
             </p>
           </Col>
         </Row>
-        <div className="tns d-flex flex-row gap-3 justify-space-between m-6">
+        <div className="tns d-flex flex-row gap-3 justify-space-between mt-6">
           <Button variant="danger" onClick={handleOpenModal}>
             Delete Product
           </Button>

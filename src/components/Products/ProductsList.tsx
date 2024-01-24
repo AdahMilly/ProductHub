@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import AddProduct from "./AddProduct";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProductsAction } from "../../redux/product/ProductActions";
+import { CircleLoader } from "react-spinners";
 
 const ProductsList = () => {
   const [state, setState] = useState({
@@ -29,7 +30,11 @@ const ProductsList = () => {
   const closeModal = () => {
     setState((prev) => ({ ...prev, showModal: false }));
   };
-  if (productsState.isLoading) return <div>Loading....</div>;
+  if (productsState.isLoading) return (
+    <div>
+      <CircleLoader color="#36d7b7" />
+    </div>
+  );
   return (
     <Container>
       <AddProduct onHide={closeModal} show={state?.showModal} />

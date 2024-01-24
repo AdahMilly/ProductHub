@@ -93,22 +93,20 @@ const EditProduct = (props: Props) => {
                 <option value="women's clothing">Women's clothing</option>
               </Form.Select>
             </Form.Group>
-            <Button
-              disabled={false}
-              className="d-flex align-items-center gap-2"
-              type="submit"
-              variant="danger">
-              {false ? <MdFrontLoader /> : <MdAddCircle />} Edit Product
-            </Button>
+            <div className="d-flex gap-3 justify-content-between">
+              <Button variant="outline" type="button" onClick={closeTagsModal}>
+                Cancel
+              </Button>
+              <Button
+                disabled={false}
+                className="d-flex align-items-center gap-2"
+                type="submit"
+                variant="danger">
+                {false ? <MdFrontLoader /> : <MdAddCircle />} Edit Product
+              </Button>
+            </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <div className="d-flex gap-3 justify-content-between">
-            <Button variant="danger" onClick={closeTagsModal}>
-              Cancel
-            </Button>
-          </div>
-        </Modal.Footer>
       </Modal>
     </div>
   );

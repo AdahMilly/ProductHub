@@ -55,7 +55,6 @@ class ProductsApi {
     try {
       const response = await this.instance.post("/products", product);
       return response.data;
-      console.log(response.data);
       
     } catch (error) {
       return { message: "request failed", error };
@@ -68,7 +67,6 @@ class ProductsApi {
         `/products/${productId}`,
         product
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return { message: "request failed", error };

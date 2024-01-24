@@ -1,35 +1,36 @@
 import { Button, Modal } from "react-bootstrap";
-// import { useAddTagMutation } from "./tagsSlice";
-// import SpinnerButton from "components/common/SpinnerButton";
-import { MdDelete, MdFrontLoader } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { deleteProductAction } from "../../redux/product/ProductActions";
+import { Product } from "../../api/types";
+import { useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../routes/routes";
 
 type Props = {
   show: boolean;
   onHide: () => void;
 };
 const DeleteProductModal = (props: Props) => {
+  const { productId } = useParams();
   const { show, onHide: closeModal } = props;
 
-  const handleDelete = () => {};
+  const navigate = useNavigate();
 
-  //   const [addTag] = useAddTagMutation();
-  //   const handleAddTag = async (e: React.FormEvent, tagsData: AddTags) => {
-  //     e.preventDefault();
-  //     try {
-  //       const response = await addTag({ ...tagsData }).unwrap();
-  //       if (response.result.message === "tag created succcessful") {
-  //         closeTagsModal();
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const productState = useAppSelector((state) => state.products);
+  const product = productState.products.find(
+    (product) => product.id === Number(productId)
+  ) as Product;
+  const dispatch = useAppDispatch();
+
+  const handleDelete = (productId: number) => {
+    dispatch(deleteProductAction(productId));
+    navigate(routes.home);
+  };
 
   return (
     <div>
       <Modal show={show} onHide={closeModal}>
         <Modal.Header>
-          <h1>Add Tag</h1>
+          <h1>Delete Tag</h1>
         </Modal.Header>
         <Modal.Body>
           <p>
@@ -42,7 +43,9 @@ const DeleteProductModal = (props: Props) => {
             <Button variant="danger" onClick={closeModal}>
               Cancel
             </Button>
-            <Button variant="danger" onClick={handleDelete}>
+            <Button
+              variant="danger"
+              onClick={() => handleDelete(productId as unknown as number)}>
               Delete
             </Button>
           </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { MdAddCircle, MdFrontLoader } from "react-icons/md";
-import { AddProductPayload, AddProductProps } from "../../api/types";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {  AddProductProps } from "../../api/types";
+import { useAppDispatch } from "../../redux/hooks";
 import { addProductAction } from "../../redux/product/ProductActions";
 
 type Props = {
@@ -37,9 +37,7 @@ const AddProduct = (props: Props) => {
           <h1>Add new product</h1>
         </Modal.Header>
         <Modal.Body>
-          <form
-            onSubmit={handleAddProduct}
->
+          <form onSubmit={handleAddProduct}>
             <Form.Group className="gap-2 mb-2">
               <Form.Label>Title </Form.Label>
               <Form.Control
