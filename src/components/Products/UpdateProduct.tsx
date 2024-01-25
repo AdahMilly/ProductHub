@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { MdAddCircle, MdFrontLoader } from "react-icons/md";
 import { AddProductProps, Product } from "../../api/types";
+import { updateProductAction } from "../../redux/product/ProductActions";
+import { useAppDispatch } from "../../redux/hooks";
 
 type Props = {
   show: boolean;
@@ -9,9 +11,8 @@ type Props = {
   product: Product;
 };
 const EditProduct = (props: Props) => {
-  const { show, onHide: closeTagsModal, product } = props;
+  const { show, onHide: closeEditModal, product } = props;
   console.log(product);
-  
 
   const [state, setState] = useState<AddProductProps>({
     title: product.title || "",
@@ -24,12 +25,19 @@ const EditProduct = (props: Props) => {
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
+  const dispatch = useAppDispatch();
+  const handlUpdateProduct = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(updateProductAction({ product:state, productId: product.id }));
+    // closeEditModal();
+  };
+
   return (
     <div>
-      <Modal show={show} onHide={closeTagsModal}>
-        <Modal.Header>Add Tag</Modal.Header>
+      <Modal show={show} onHide={closeEditModal}>
+        <Modal.Header>Edit Product</Modal.Header>
         <Modal.Body>
-          <form>
+          <form onClick={handlUpdateProduct}>
             <Form.Group className="gap-2 mb-2">
               <Form.Label>Title </Form.Label>
               <Form.Control
@@ -94,7 +102,7 @@ const EditProduct = (props: Props) => {
               </Form.Select>
             </Form.Group>
             <div className="d-flex gap-3 justify-content-between">
-              <Button variant="outline" type="button" onClick={closeTagsModal}>
+              <Button variant="outline" type="button" onClick={closeEditModal}>
                 Cancel
               </Button>
               <Button

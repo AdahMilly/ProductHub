@@ -17,8 +17,10 @@ const ProductsList = () => {
   console.log(productsState);
 
   useEffect(() => {
-    dispatch(fetchProductsAction({}));
-  }, []);
+    if (productsState.products.length === 0) {
+      dispatch(fetchProductsAction({}));
+    }
+  }, [productsState.products.length]);
 
   const handleOpenModal = (e: any) => {
     e.preventDefault();
@@ -30,11 +32,12 @@ const ProductsList = () => {
   const closeModal = () => {
     setState((prev) => ({ ...prev, showModal: false }));
   };
-  if (productsState.isLoading) return (
-    <div>
-      <CircleLoader color="#36d7b7" />
-    </div>
-  );
+  if (productsState.isLoading)
+    return (
+      <div>
+        <CircleLoader color="#36d7b7" />
+      </div>
+    );
   return (
     <Container>
       <AddProduct onHide={closeModal} show={state?.showModal} />
@@ -57,8 +60,8 @@ const ProductsList = () => {
       <hr />
       <DropdownDivider />
       <div className="product-list row h-100">
-        {productsState.products.length > 0 ? (
-          productsState.products.map((product) => (
+        {productsState?.products?.length > 0 ? (
+          productsState?.products?.map((product) => (
             <Col className="mt-3" xs={12} sm={6} md={4}>
               <ProductCard product={product} />
             </Col>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { productsApi } from "../../api";
-import { AddProductPayload, GetProductsFilter } from "../../api/types";
+import { AddProductPayload, GetProductsFilter, Product } from "../../api/types";
 
 export const fetchProductsAction = createAsyncThunk(
   "products/fetchProducts",
@@ -35,7 +35,19 @@ export const deleteProductAction = createAsyncThunk(
 );
 export const updateProductAction = createAsyncThunk(
   "products/updateProduct",
-  async(product:AddProductPayload, thunkApi) => {
-    // const updatedProduct = await productsApi.updateProduct(product, productId)
+  async (
+    productInfo: { product: AddProductPayload; productId: number },
+    thunkApi
+  ) => {
+    const updatedProduct = await productsApi.updateProduct(
+      productInfo.productId,
+      productInfo.product
+    );
+    if (updatedProduct.error) {
+      return thunkApi.rejectWithValue(updatedProduct);
+    }
+    console.log(updatedProduct);
+    
+    return updatedProduct
   }
-)
+);

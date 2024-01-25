@@ -1,6 +1,4 @@
 import { Button, Col, Container, DropdownDivider, Row } from "react-bootstrap";
-import ImgP from "../../images/laura.jpg";
-import NarBar from "../NavBar/NarBar";
 import { useState } from "react";
 import DeleteProductModal from "./DeleteProductModal";
 import EditProduct from "./UpdateProduct";
@@ -48,11 +46,16 @@ const ViewProduct = () => {
           show={state?.showEditModal}
           product={product}
         />
-        <h2 className="p-4">Product Detail</h2>
+        <div className="sect d-flex align-items-center justify-content-between ">
+          {" "}
+          <h2 className="p-4">Product Detail</h2>
+          <Button className="btn btn-dark">Back</Button>
+        </div>
+
         <hr />
         <DropdownDivider />
         <Row>
-          <Col sm={4}>
+          <Col sm={4} className="d-flex gap-4">
             <img src={image} alt="" height={400} width={400} />
           </Col>
           <Col md={8}>

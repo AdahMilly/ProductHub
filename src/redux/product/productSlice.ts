@@ -4,6 +4,7 @@ import {
   addProductAction,
   deleteProductAction,
   fetchProductsAction,
+  updateProductAction,
 } from "./ProductActions";
 
 type InitialState = {
@@ -66,6 +67,22 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.error = "An error occured while fetching product";
       });
+      builder
+        .addCase(updateProductAction.pending, (state) => {
+          state.isLoading = true;
+          state.error = "";
+        })
+        .addCase(updateProductAction.fulfilled, (state, action) => {
+          state.isLoading = false;
+          const productIdToUpdate = action.payload;
+          state.products = state.products.map(
+            (product) => product.id === productIdToUpdate.id ? productIdToUpdate : product
+          );
+        })
+        .addCase(updateProductAction.rejected, (state) => {
+          state.isLoading = false;
+          state.error = "An error occured while fetching product";
+        });
   },
 });
 
