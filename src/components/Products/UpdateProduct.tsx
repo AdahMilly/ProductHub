@@ -29,7 +29,6 @@ const EditProduct = (props: Props) => {
   const handlUpdateProduct = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(updateProductAction({ product:state, productId: product.id }));
-    // closeEditModal();
   };
 
   return (

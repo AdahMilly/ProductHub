@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { productsApi } from "../../api";
 import { Button, Col, Container, DropdownDivider } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import AddProduct from "./AddProduct";

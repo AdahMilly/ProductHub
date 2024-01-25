@@ -3,11 +3,13 @@ import { useState } from "react";
 import DeleteProductModal from "./DeleteProductModal";
 import EditProduct from "./UpdateProduct";
 import { Product } from "../../api/types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
+import { routes } from "../../routes/routes";
 
 const ViewProduct = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const productsState = useAppSelector((state) => state.products);
   const product = productsState.products.find(
     (product) => product.id === Number(productId)
@@ -37,6 +39,10 @@ const ViewProduct = () => {
   const closeEditModal = () => {
     setState((prev) => ({ ...prev, showEditModal: false }));
   };
+
+  const handleclick = () => {
+    navigate(routes.home);
+  };
   return (
     <>
       <Container>
@@ -49,7 +55,9 @@ const ViewProduct = () => {
         <div className="sect d-flex align-items-center justify-content-between ">
           {" "}
           <h2 className="p-4">Product Detail</h2>
-          <Button className="btn btn-dark">Back</Button>
+          <Button type="button" className="btn btn-dark" onClick={handleclick}>
+            Back
+          </Button>
         </div>
 
         <hr />
