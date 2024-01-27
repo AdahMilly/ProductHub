@@ -101,14 +101,14 @@ const EditProduct = (props: Props) => {
               </Form.Select>
             </Form.Group>
             <div className="d-flex gap-3 justify-content-between">
-              <Button variant="outline" type="button" onClick={closeEditModal}>
+              <Button variant="dark" type="button" onClick={closeEditModal}>
                 Cancel
               </Button>
               <Button
                 disabled={false}
                 className="d-flex align-items-center gap-2"
                 type="submit"
-                variant="danger">
+                variant="primary">
                 {false ? <MdFrontLoader /> : <MdAddCircle />} Edit Product
               </Button>
             </div>

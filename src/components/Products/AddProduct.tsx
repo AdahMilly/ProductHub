@@ -103,7 +103,7 @@ const AddProduct = (props: Props) => {
             </Form.Group>
             <div className="d-flex gap-3 justify-content-between">
               <Button
-                variant="outline"
+                variant="dark"
                 type="button"
                 onClick={closeProductModal}>
                 Cancel
@@ -112,7 +112,7 @@ const AddProduct = (props: Props) => {
                 disabled={false}
                 className="d-flex align-items-center gap-2"
                 type="submit"
-                variant="danger">
+                variant="primary">
                 {false ? <MdFrontLoader /> : <MdAddCircle />} Add Product
               </Button>
             </div>

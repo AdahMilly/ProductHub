@@ -5,6 +5,7 @@ import AddProduct from "./AddProduct";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProductsAction } from "../../redux/product/ProductActions";
 import { CircleLoader } from "react-spinners";
+import { MdFilter } from "react-icons/md";
 
 const ProductsList = () => {
   const [state, setState] = useState({
@@ -44,10 +45,9 @@ const ProductsList = () => {
         <h1>Products</h1>
         <div className="search-products d-flex flex-row justify-space-between align-items-center gap-3">
           <div className="filter-products d-flex flex-row gap-2">
-            <p>Filter</p>
-            <span>
-              <i className="fa-solid fa-filter"></i>
-            </span>
+            <Button variant="outline" className="btn ml-3">
+              <MdFilter /> Filter
+            </Button>
           </div>
           <div className="btn-product m-2">
             <Button variant="primary" onClick={handleOpenModal}>
