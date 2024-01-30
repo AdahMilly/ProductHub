@@ -51,3 +51,19 @@ export const updateProductAction = createAsyncThunk(
     return updatedProduct
   }
 );
+export const fetchProductsByCategoryAction = createAsyncThunk(
+  "products/fetchProductsByCategory",
+  async (
+    {
+      category,
+      filter = {},
+    }: { category: string; filter: GetProductsFilter},
+    thunkApi
+  ) => {
+    const response = await productsApi.getAllProductsByCategory(category,filter);
+    if (response.error) {
+      return thunkApi.rejectWithValue(response);
+    }
+    return { products: response };
+  }
+);

@@ -17,6 +17,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         style={{ objectFit: "cover" }}
         variant="top"
         src={image}
+        loading="lazy"
       />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
