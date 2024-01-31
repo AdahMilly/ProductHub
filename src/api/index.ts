@@ -19,7 +19,6 @@ class ProductsApi {
   async getSingleProduct(productId: number) {
     try {
       const response = await this.instance.get(`/products/${productId}`);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return { message: "request failed", error };
@@ -50,12 +49,21 @@ class ProductsApi {
       return { message: "request failed", error };
     }
   }
+  async getSortedProducts(sort: GetProductsFilter = {}) {
+    try {
+      const response = await this.instance.get(
+        `/products?${queryString.stringify(sort)}`
+      );
+      return response.data;
+    } catch (error) {
+      return { message: "request failed", error };
+    }
+  }
 
   async addProduct(product: AddProductPayload) {
     try {
       const response = await this.instance.post("/products", product);
       return response.data;
-      
     } catch (error) {
       return { message: "request failed", error };
     }

@@ -12,7 +12,6 @@ type Props = {
 };
 const EditProduct = (props: Props) => {
   const { show, onHide: closeEditModal, product } = props;
-  console.log(product);
 
   const [state, setState] = useState<AddProductProps>({
     title: product.title || "",

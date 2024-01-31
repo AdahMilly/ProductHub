@@ -6,8 +6,10 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   fetchProductsAction,
   fetchProductsByCategoryAction,
+  fetchSortedProductsAction,
 } from "../../redux/product/ProductActions";
 import { CircleLoader } from "react-spinners";
+import { GetProductsFilter } from "../../api/types";
 
 const ProductsList = () => {
   const [state, setState] = useState({
@@ -15,15 +17,15 @@ const ProductsList = () => {
     isLoading: false,
   });
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [sortedProducts, setSortedProducts] = useState("");
   const dispatch = useAppDispatch();
   const productsState = useAppSelector((state) => state.products);
-  console.log(productsState);
 
   useEffect(() => {
     if (productsState.products.length === 0) {
       dispatch(fetchProductsAction({}));
     }
-  }, [productsState.products.length]);
+  }, []);
 
   const handleOpenModal = (e: any) => {
     e.preventDefault();
@@ -42,11 +44,37 @@ const ProductsList = () => {
     "men's clothing",
     "women's clothing",
   ];
+  const sorts = ["desc", "asc"];
   return (
     <Container>
       <AddProduct onHide={closeModal} show={state?.showModal} />
       <div className="d-flex flex-row w-100 justify-content-between align-items-center gap-3">
-        <h1>Products</h1>
+        <div className="sect-one d-flex flex-row justify-space-between align-items-center gap-3">
+          <Form.Select
+            value={sortedProducts}
+            onChange={(e) => {
+              setSortedProducts(e.target.value);
+
+              dispatch(
+                fetchSortedProductsAction({
+                  params: { sort: e.target.value } as GetProductsFilter,
+                })
+              );
+            }}>
+            <option>Sort Products</option>
+            {sorts.map((sortss) => (
+              <option value={sortss}>{sortss}</option>
+            ))}
+          </Form.Select>
+          <Button
+            onClick={() => {
+              setSortedProducts("");
+              dispatch(fetchProductsAction({}));
+            }}>
+            Clear
+          </Button>
+        </div>
+
         <div className="search-products d-flex flex-row justify-space-between align-items-center gap-3">
           <div className="filter-products d-flex flex-row gap-2">
             <Form.Select

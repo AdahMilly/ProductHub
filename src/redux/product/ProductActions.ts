@@ -46,21 +46,31 @@ export const updateProductAction = createAsyncThunk(
     if (updatedProduct.error) {
       return thunkApi.rejectWithValue(updatedProduct);
     }
-    console.log(updatedProduct);
-    
-    return updatedProduct
+  
+
+    return updatedProduct;
   }
 );
 export const fetchProductsByCategoryAction = createAsyncThunk(
   "products/fetchProductsByCategory",
   async (
-    {
-      category,
-      filter = {},
-    }: { category: string; filter: GetProductsFilter},
+    { category, filter = {} }: { category: string; filter: GetProductsFilter },
     thunkApi
   ) => {
-    const response = await productsApi.getAllProductsByCategory(category,filter);
+    const response = await productsApi.getAllProductsByCategory(
+      category,
+      filter
+    );
+    if (response.error) {
+      return thunkApi.rejectWithValue(response);
+    }
+    return { products: response };
+  }
+);
+export const fetchSortedProductsAction = createAsyncThunk(
+  "products/fetchSortedProducts",
+  async ({ params = {} }: { params?: GetProductsFilter }, thunkApi) => {
+    const response = await productsApi.getSortedProducts(params);
     if (response.error) {
       return thunkApi.rejectWithValue(response);
     }

@@ -5,6 +5,7 @@ import {
   deleteProductAction,
   fetchProductsAction,
   fetchProductsByCategoryAction,
+  fetchSortedProductsAction,
   updateProductAction,
 } from "./ProductActions";
 
@@ -95,6 +96,20 @@ export const productSlice = createSlice({
         state.products = action.payload.products;
       })
       .addCase(fetchProductsByCategoryAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = "An error occured while fetching product";
+      });
+    builder
+      .addCase(fetchSortedProductsAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+        state.products = [];
+      })
+      .addCase(fetchSortedProductsAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload.products;
+      })
+      .addCase(fetchSortedProductsAction.rejected, (state) => {
         state.isLoading = false;
         state.error = "An error occured while fetching product";
       });
