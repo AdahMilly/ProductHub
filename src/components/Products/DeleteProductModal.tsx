@@ -40,7 +40,7 @@ const DeleteProductModal = (props: Props) => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex gap-3 justify-content-between">
-            <Button variant="danger" onClick={closeModal}>
+            <Button variant="dark" onClick={closeModal}>
               Cancel
             </Button>
             <Button

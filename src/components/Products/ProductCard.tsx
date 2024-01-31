@@ -17,13 +17,14 @@ const ProductCard = ({ product }: { product: Product }) => {
         style={{ objectFit: "cover" }}
         variant="top"
         src={image}
+        loading="lazy"
       />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text className="line-clamp3">{description}</Card.Text>
       </Card.Body>
       <ListGroup className="sects">
-        <ListGroup.Item>{price}</ListGroup.Item>
+        <ListGroup.Item>${price}</ListGroup.Item>
         <ListGroup.Item>{category}</ListGroup.Item>
       </ListGroup>
       <Card.Body>

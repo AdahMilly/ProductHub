@@ -74,7 +74,7 @@ const ViewProduct = () => {
               Description: <span>{description}</span>
             </p>
             <p>
-              Price: <span>{price}</span>
+              Price: <span>${price}</span>
             </p>
             <p>
               Category: <span>{category}</span>

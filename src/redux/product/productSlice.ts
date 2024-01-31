@@ -4,6 +4,8 @@ import {
   addProductAction,
   deleteProductAction,
   fetchProductsAction,
+  fetchProductsByCategoryAction,
+  fetchSortedProductsAction,
   updateProductAction,
 } from "./ProductActions";
 
@@ -67,22 +69,50 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.error = "An error occured while fetching product";
       });
-      builder
-        .addCase(updateProductAction.pending, (state) => {
-          state.isLoading = true;
-          state.error = "";
-        })
-        .addCase(updateProductAction.fulfilled, (state, action) => {
-          state.isLoading = false;
-          const productIdToUpdate = action.payload;
-          state.products = state.products.map(
-            (product) => product.id === productIdToUpdate.id ? productIdToUpdate : product
-          );
-        })
-        .addCase(updateProductAction.rejected, (state) => {
-          state.isLoading = false;
-          state.error = "An error occured while fetching product";
-        });
+    builder
+      .addCase(updateProductAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+      })
+      .addCase(updateProductAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const productIdToUpdate = action.payload;
+        state.products = state.products.map((product) =>
+          product.id === productIdToUpdate.id ? productIdToUpdate : product
+        );
+      })
+      .addCase(updateProductAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = "An error occured while fetching product";
+      });
+    builder
+      .addCase(fetchProductsByCategoryAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+        state.products = [];
+      })
+      .addCase(fetchProductsByCategoryAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload.products;
+      })
+      .addCase(fetchProductsByCategoryAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = "An error occured while fetching product";
+      });
+    builder
+      .addCase(fetchSortedProductsAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+        state.products = [];
+      })
+      .addCase(fetchSortedProductsAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload.products;
+      })
+      .addCase(fetchSortedProductsAction.rejected, (state) => {
+        state.isLoading = false;
+        state.error = "An error occured while fetching product";
+      });
   },
 });
 

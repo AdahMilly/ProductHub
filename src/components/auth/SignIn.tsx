@@ -27,11 +27,11 @@ const SignIn = () => {
     console.log(error);
   };
   return (
-    <Container>
+    <Container data-testid="login">
       <div className="signin d-flex align-items-center justify-content-center vh-100 p-4">
         <Card className="card mb-3 p-4" style={{ width: 400, height: 200 }}>
           <div className="lg-items d-flex flex-column align-items-center">
-            <h2 data-testId="login">Sign in with Google</h2>
+            <h2>Sign in with Google</h2>
             <GoogleLogin
               width={10}
               onSuccess={(Credential) => responseMessage(Credential)}
