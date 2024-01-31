@@ -1,5 +1,5 @@
 import { Button, Col, Container, DropdownDivider, Row } from "react-bootstrap";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import DeleteProductModal from "./DeleteProductModal";
 import EditProduct from "./UpdateProduct";
 import { Product } from "../../api/types";

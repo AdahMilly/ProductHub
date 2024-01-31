@@ -1,8 +1,11 @@
+import { Suspense, lazy } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes/routes";
-import ViewProduct from "./components/Products/ViewProduct";
 import Layout from "./components/Layout/Layout";
 import SignIn from "./components/auth/SignIn";
+
+const ViewProduct = lazy(() => import("./components/Products/ViewProduct"));
 
 function App() {
   return (
@@ -13,7 +16,11 @@ function App() {
           <Route path={routes.home} element={<Layout />} />
           <Route
             path={`${routes.viewProduct}/:productId`}
-            element={<ViewProduct />}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ViewProduct />
+              </Suspense>
+            }
           />
         </Routes>
       </BrowserRouter>
