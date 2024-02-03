@@ -17,7 +17,7 @@ const AddProduct = (props: Props) => {
     description: "",
     price: 0,
     image: "",
-    category: "jewelry",
+    category: "jewelery",
   });
   const dispatch = useAppDispatch();
   const handleAddProduct = (e: React.FormEvent) => {
@@ -96,7 +96,7 @@ const AddProduct = (props: Props) => {
                 }>
                 <option>Select category</option>
                 <option value="electronics">Electronics</option>
-                <option value="jewelry">Jewelry</option>
+                <option value="jewelery">Jewelry</option>
                 <option value="men's clothing">Men's clothing</option>
                 <option value="women's clothing">Women's clothing</option>
               </Form.Select>

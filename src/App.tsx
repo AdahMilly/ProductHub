@@ -13,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={routes.login} element={<SignIn />} />
+
           <Route path={routes.home} element={<Layout />} />
           <Route
             path={`${routes.viewProduct}/:productId`}
